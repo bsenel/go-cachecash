@@ -24,7 +24,7 @@ message CacheAnnounceRequest {
     uint64 total_disk = 6;
 
     int64 startup_time = 7;
-    string contact_url = 8;
+    string contact_addr = 8;
 
     uint32 port = 9;
 }
@@ -48,7 +48,7 @@ message CacheDescription {
     uint64 total_disk = 6;
 
     int64 startup_time = 7;
-    string contact_url = 8;
+    string contact_addr = 8;
 
     string external_ip = 9;
     uint32 port = 10;

@@ -24,7 +24,7 @@ CREATE TABLE caches (
     port INTEGER NOT NULL,
 
     -- a URI where interested publishers can contact them
-    contact_url VARCHAR NOT NULL,
+    contact_addr VARCHAR NOT NULL,
 
     -- we use this to remove stale announcements
     last_ping DATETIME NOT NULL,

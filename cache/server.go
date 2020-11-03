@@ -38,7 +38,7 @@ type ConfigFile struct {
 
 	BadgerDirectory string        `json:"badger_directory"`
 	Database        string        `json:"database"`
-	ContactUrl      string        `json:"contact_url"`
+	ContactAddr      string        `json:"contact_addr"`
 	MetricsEndpoint string        `json:"metrics_endpoint"`
 	SyncInterval    time.Duration `json:"sync_interval"`
 	Insecure        bool          `json:"insecure"`
@@ -225,7 +225,7 @@ func (s *clientProtocolServer) Start() error {
 				Stats:       stats,
 				StartupTime: s.cache.StartupTime,
 				Port:        uint32(port),
-				ContactUrl:  s.conf.ContactUrl,
+				ContactAddr:  s.conf.ContactAddr,
 			})
 			if err != nil {
 				s.l.Error("failed to announce cache: ", err)

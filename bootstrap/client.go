@@ -38,7 +38,7 @@ type BootstrapInfo struct {
 	Stats       *CacheStats
 	StartupTime time.Time
 	Port        uint32
-	ContactUrl  string
+	ContactAddr  string
 }
 
 func (c *Client) AnnounceCache(ctx context.Context, info BootstrapInfo) error {
@@ -54,7 +54,7 @@ func (c *Client) AnnounceCache(ctx context.Context, info BootstrapInfo) error {
 		FreeDisk:    info.Stats.FreeDisk,
 		TotalDisk:   info.Stats.TotalDisk,
 		StartupTime: info.StartupTime.Unix(),
-		ContactUrl:  info.ContactUrl,
+		ContactAddr:  info.ContactAddr,
 		Port:        info.Port,
 	})
 	if err != nil {

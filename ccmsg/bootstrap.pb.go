@@ -33,7 +33,7 @@ type CacheAnnounceRequest struct {
 	FreeDisk             uint64   `protobuf:"varint,5,opt,name=free_disk,json=freeDisk,proto3" json:"free_disk,omitempty"`
 	TotalDisk            uint64   `protobuf:"varint,6,opt,name=total_disk,json=totalDisk,proto3" json:"total_disk,omitempty"`
 	StartupTime          int64    `protobuf:"varint,7,opt,name=startup_time,json=startupTime,proto3" json:"startup_time,omitempty"`
-	ContactUrl           string   `protobuf:"bytes,8,opt,name=contact_url,json=contactUrl,proto3" json:"contact_url,omitempty"`
+	ContactAddr           string   `protobuf:"bytes,8,opt,name=contact_addr,json=contactAddr,proto3" json:"contact_addr,omitempty"`
 	Port                 uint32   `protobuf:"varint,9,opt,name=port,proto3" json:"port,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -122,9 +122,9 @@ func (m *CacheAnnounceRequest) GetStartupTime() int64 {
 	return 0
 }
 
-func (m *CacheAnnounceRequest) GetContactUrl() string {
+func (m *CacheAnnounceRequest) GetContactAddr() string {
 	if m != nil {
-		return m.ContactUrl
+		return m.ContactAddr
 	}
 	return ""
 }
@@ -222,7 +222,7 @@ type CacheDescription struct {
 	FreeDisk             uint64   `protobuf:"varint,5,opt,name=free_disk,json=freeDisk,proto3" json:"free_disk,omitempty"`
 	TotalDisk            uint64   `protobuf:"varint,6,opt,name=total_disk,json=totalDisk,proto3" json:"total_disk,omitempty"`
 	StartupTime          int64    `protobuf:"varint,7,opt,name=startup_time,json=startupTime,proto3" json:"startup_time,omitempty"`
-	ContactUrl           string   `protobuf:"bytes,8,opt,name=contact_url,json=contactUrl,proto3" json:"contact_url,omitempty"`
+	ContactAddr           string   `protobuf:"bytes,8,opt,name=contact_addr,json=contactAddr,proto3" json:"contact_addr,omitempty"`
 	ExternalIp           string   `protobuf:"bytes,9,opt,name=external_ip,json=externalIp,proto3" json:"external_ip,omitempty"`
 	Port                 uint32   `protobuf:"varint,10,opt,name=port,proto3" json:"port,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -312,9 +312,9 @@ func (m *CacheDescription) GetStartupTime() int64 {
 	return 0
 }
 
-func (m *CacheDescription) GetContactUrl() string {
+func (m *CacheDescription) GetContactAddr() string {
 	if m != nil {
-		return m.ContactUrl
+		return m.ContactAddr
 	}
 	return ""
 }
@@ -580,11 +580,11 @@ func (m *CacheAnnounceRequest) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintBootstrap(dAtA, i, uint64(m.StartupTime))
 	}
-	if len(m.ContactUrl) > 0 {
+	if len(m.ContactAddr) > 0 {
 		dAtA[i] = 0x42
 		i++
-		i = encodeVarintBootstrap(dAtA, i, uint64(len(m.ContactUrl)))
-		i += copy(dAtA[i:], m.ContactUrl)
+		i = encodeVarintBootstrap(dAtA, i, uint64(len(m.ContactAddr)))
+		i += copy(dAtA[i:], m.ContactAddr)
 	}
 	if m.Port != 0 {
 		dAtA[i] = 0x48
@@ -691,11 +691,11 @@ func (m *CacheDescription) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintBootstrap(dAtA, i, uint64(m.StartupTime))
 	}
-	if len(m.ContactUrl) > 0 {
+	if len(m.ContactAddr) > 0 {
 		dAtA[i] = 0x42
 		i++
-		i = encodeVarintBootstrap(dAtA, i, uint64(len(m.ContactUrl)))
-		i += copy(dAtA[i:], m.ContactUrl)
+		i = encodeVarintBootstrap(dAtA, i, uint64(len(m.ContactAddr)))
+		i += copy(dAtA[i:], m.ContactAddr)
 	}
 	if len(m.ExternalIp) > 0 {
 		dAtA[i] = 0x4a
@@ -785,7 +785,7 @@ func (m *CacheAnnounceRequest) Size() (n int) {
 	if m.StartupTime != 0 {
 		n += 1 + sovBootstrap(uint64(m.StartupTime))
 	}
-	l = len(m.ContactUrl)
+	l = len(m.ContactAddr)
 	if l > 0 {
 		n += 1 + l + sovBootstrap(uint64(l))
 	}
@@ -851,7 +851,7 @@ func (m *CacheDescription) Size() (n int) {
 	if m.StartupTime != 0 {
 		n += 1 + sovBootstrap(uint64(m.StartupTime))
 	}
-	l = len(m.ContactUrl)
+	l = len(m.ContactAddr)
 	if l > 0 {
 		n += 1 + l + sovBootstrap(uint64(l))
 	}
@@ -1091,7 +1091,7 @@ func (m *CacheAnnounceRequest) Unmarshal(dAtA []byte) error {
 			}
 		case 8:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ContactUrl", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ContactAddr", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1119,7 +1119,7 @@ func (m *CacheAnnounceRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ContactUrl = string(dAtA[iNdEx:postIndex])
+			m.ContactAddr = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 9:
 			if wireType != 0 {
@@ -1465,7 +1465,7 @@ func (m *CacheDescription) Unmarshal(dAtA []byte) error {
 			}
 		case 8:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ContactUrl", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ContactAddr", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1493,7 +1493,7 @@ func (m *CacheDescription) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ContactUrl = string(dAtA[iNdEx:postIndex])
+			m.ContactAddr = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 9:
 			if wireType != 2 {

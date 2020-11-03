@@ -32,7 +32,7 @@ bootstrap_addr = "bootstrapd:7777"
 
 badger_directory = "./chunks/"
 database = "cache.db"
-contact_url = ""
+contact_addr = ""
 ```
 
 # publisher example config

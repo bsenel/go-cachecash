@@ -47,7 +47,7 @@ func loadConfigFile(l *logrus.Logger, path string) (*cache.ConfigFile, error) {
 
 	conf.BadgerDirectory = p.GetString("badger_directory", "./chunks/")
 	conf.Database = p.GetString("database", "cache.db")
-	conf.ContactUrl = p.GetString("contact_url", "")
+	conf.ContactAddr = p.GetString("contact_addr", "")
 	conf.MetricsEndpoint = p.GetString("metrics_endpoint", "")
 	conf.SyncInterval = p.GetSeconds("sync-interval", ledgerclient.DEFAULT_SYNC_INTERVAL)
 	conf.Insecure = p.GetInsecure()

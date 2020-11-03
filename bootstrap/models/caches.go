@@ -33,7 +33,7 @@ type Cache struct {
 	StartupTime time.Time         `boil:"startup_time" json:"startup_time" toml:"startup_time" yaml:"startup_time"`
 	ExternalIP  net.IP            `boil:"external_ip" json:"external_ip" toml:"external_ip" yaml:"external_ip"`
 	Port        uint32            `boil:"port" json:"port" toml:"port" yaml:"port"`
-	ContactURL  string            `boil:"contact_url" json:"contact_url" toml:"contact_url" yaml:"contact_url"`
+	ContactAddr  string            `boil:"contact_addr" json:"contact_addr" toml:"contact_addr" yaml:"contact_addr"`
 	LastPing    time.Time         `boil:"last_ping" json:"last_ping" toml:"last_ping" yaml:"last_ping"`
 
 	R *cacheR `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -50,7 +50,7 @@ var CacheColumns = struct {
 	StartupTime string
 	ExternalIP  string
 	Port        string
-	ContactURL  string
+	ContactAddr  string
 	LastPing    string
 }{
 	PublicKey:   "public_key",
@@ -62,7 +62,7 @@ var CacheColumns = struct {
 	StartupTime: "startup_time",
 	ExternalIP:  "external_ip",
 	Port:        "port",
-	ContactURL:  "contact_url",
+	ContactAddr:  "contact_addr",
 	LastPing:    "last_ping",
 }
 
@@ -163,7 +163,7 @@ var CacheWhere = struct {
 	StartupTime whereHelpertime_Time
 	ExternalIP  whereHelpernet_IP
 	Port        whereHelperuint32
-	ContactURL  whereHelperstring
+	ContactAddr  whereHelperstring
 	LastPing    whereHelpertime_Time
 }{
 	PublicKey:   whereHelpered25519_PublicKey{field: "\"caches\".\"public_key\""},
@@ -175,7 +175,7 @@ var CacheWhere = struct {
 	StartupTime: whereHelpertime_Time{field: "\"caches\".\"startup_time\""},
 	ExternalIP:  whereHelpernet_IP{field: "\"caches\".\"external_ip\""},
 	Port:        whereHelperuint32{field: "\"caches\".\"port\""},
-	ContactURL:  whereHelperstring{field: "\"caches\".\"contact_url\""},
+	ContactAddr:  whereHelperstring{field: "\"caches\".\"contact_addr\""},
 	LastPing:    whereHelpertime_Time{field: "\"caches\".\"last_ping\""},
 }
 
@@ -196,8 +196,8 @@ func (*cacheR) NewStruct() *cacheR {
 type cacheL struct{}
 
 var (
-	cacheAllColumns            = []string{"public_key", "version", "free_memory", "total_memory", "free_disk", "total_disk", "startup_time", "external_ip", "port", "contact_url", "last_ping"}
-	cacheColumnsWithoutDefault = []string{"public_key", "version", "free_memory", "total_memory", "free_disk", "total_disk", "startup_time", "external_ip", "port", "contact_url", "last_ping"}
+	cacheAllColumns            = []string{"public_key", "version", "free_memory", "total_memory", "free_disk", "total_disk", "startup_time", "external_ip", "port", "contact_addr", "last_ping"}
+	cacheColumnsWithoutDefault = []string{"public_key", "version", "free_memory", "total_memory", "free_disk", "total_disk", "startup_time", "external_ip", "port", "contact_addr", "last_ping"}
 	cacheColumnsWithDefault    = []string{}
 	cachePrimaryKeyColumns     = []string{"public_key"}
 )

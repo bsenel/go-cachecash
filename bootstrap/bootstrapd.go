@@ -63,17 +63,17 @@ func (b *Bootstrapd) HandleCacheAnnounceRequest(ctx context.Context, req *ccmsg.
 
 	var srcIP net.IP
 	// give priority to cache's contact url if set properly
-	if req.ContactUrl != "" {
+	if req.ContactAddr != "" {
 		l := b.l.WithFields(logrus.Fields{
-			"contactUrl": req.ContactUrl,
+			"contactAddr": req.ContactAddr,
 		})
-		contactUrl, err := url.Parse(req.ContactUrl)
-		if err != nil || contactUrl.Host == "" {
-			if srcIP = net.ParseIP(req.ContactUrl); srcIP == nil {
+		contactAddr, err := url.Parse(req.ContactAddr)
+		if err != nil || contactAddr.Host == "" {
+			if srcIP = net.ParseIP(req.ContactAddr); srcIP == nil {
 				l.Info("invalid contact url form")
 			}
 		} else {
-			addrs, err := net.LookupIP(contactUrl.Host)
+			addrs, err := net.LookupIP(contactAddr.Host)
 			if err != nil {
 				l.Info("could not lookup hostname ip from contact url")
 			}
@@ -113,7 +113,7 @@ func (b *Bootstrapd) HandleCacheAnnounceRequest(ctx context.Context, req *ccmsg.
 		StartupTime: startupTime,
 		ExternalIP:  srcIP,
 		Port:        req.Port,
-		ContactURL:  req.ContactUrl,
+		ContactAddr:  req.ContactAddr,
 		LastPing:    time.Now(),
 	}
 
@@ -173,7 +173,7 @@ func (b *Bootstrapd) HandleCacheFetchRequest(ctx context.Context, req *ccmsg.Cac
 			FreeDisk:    c.FreeDisk,
 			TotalDisk:   c.TotalDisk,
 			StartupTime: c.StartupTime.Unix(),
-			ContactUrl:  c.ContactURL,
+			ContactAddr:  c.ContactAddr,
 			ExternalIp:  c.ExternalIP.String(),
 			Port:        c.Port,
 		})
