@@ -86,7 +86,8 @@ func newClientProtocolServer(l *logrus.Logger, conf *ConfigFile) (*clientProtoco
 	grpcServer := common.NewGRPCServer(conf.Insecure)
 	metricsServer := newGRPCMetricsProxyServer(l)
 	metrics.RegisterMetricsServer(grpcServer, metricsServer)
-	grpc_prometheus.EnableHandlingTimeHistogram()
+	// Enable to observe gRPC latency
+	// grpc_prometheus.EnableHandlingTimeHistogram()
 	grpc_prometheus.Register(grpcServer)
 
 	return &clientProtocolServer{

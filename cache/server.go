@@ -121,7 +121,8 @@ func newClientProtocolServer(l *logrus.Logger, c *Cache, db *sql.DB, conf *Confi
 	grpcServer := common.NewDBGRPCServer(true, db)
 	ccmsg.RegisterClientCacheServer(grpcServer, &grpcClientCacheServer{cache: c})
 	ccmsg.RegisterPublisherCacheServer(grpcServer, &grpcPublisherCacheServer{cache: c})
-	grpc_prometheus.EnableHandlingTimeHistogram()
+	// Enable to observe gRPC latency
+	// grpc_prometheus.EnableHandlingTimeHistogram()
 	grpc_prometheus.Register(grpcServer)
 
 	httpServer := wrapGrpc(grpcServer)

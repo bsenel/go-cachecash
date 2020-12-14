@@ -85,7 +85,8 @@ var _ common.StarterShutdowner = (*bootstrapServer)(nil)
 func newBootstrapServer(l *logrus.Logger, b *Bootstrapd, db *sql.DB, conf *ConfigFile) (*bootstrapServer, error) {
 	grpcServer := common.NewDBGRPCServer(conf.Insecure, db)
 	ccmsg.RegisterNodeBootstrapdServer(grpcServer, &grpcBootstrapServer{bootstrap: b})
-	grpc_prometheus.EnableHandlingTimeHistogram()
+	// Enable to observe gRPC latency
+	// grpc_prometheus.EnableHandlingTimeHistogram()
 	grpc_prometheus.Register(grpcServer)
 
 	return &bootstrapServer{

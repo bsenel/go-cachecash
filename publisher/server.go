@@ -109,7 +109,8 @@ func newPublisherServer(l *logrus.Logger, p *ContentPublisher, db *sql.DB, conf 
 	grpcServer := common.NewDBGRPCServer(conf.Insecure, db)
 	ccmsg.RegisterCachePublisherServer(grpcServer, &grpcPublisherServer{publisher: p})
 	ccmsg.RegisterClientPublisherServer(grpcServer, &grpcPublisherServer{publisher: p})
-	grpc_prometheus.EnableHandlingTimeHistogram()
+	// Enable to observe gRPC latency
+	// grpc_prometheus.EnableHandlingTimeHistogram()
 	grpc_prometheus.Register(grpcServer)
 
 	httpServer := wrapGrpc(grpcServer, conf)
